@@ -338,6 +338,155 @@ void Command3(int &argc, char *argv[])
 
 void Command4(int &argc, char *argv[])
 {
+    cout << "Algorithm: " << argv[2] << " | " << argv[3] << endl;
+    fstream inputFile(argv[4]);
+    cout << "Input file: " << argv[4] << endl;
+    int size;
+    inputFile >> size;
+    cout << "Input size: " << size << endl;
+    long long *a = new long long[size];
+    long long *b = new long long[size];
+    for (int i = 0; i < size; i++)
+    {
+        inputFile >> a[i];
+        b[i] = a[i];
+    }
+    string tempString;
+    tempString = argv[2];
+
+    long long compare1 = 0;
+    double runtime1 = 0;
+    if (tempString == "selection-sort")
+    {
+        selectionSort(a, size, compare1);
+        selectionSort(b, size, runtime1);
+    }
+    if (tempString == "insertion-sort")
+    {
+        insertionSort(a, size, runtime1);
+        insertionSort(b, size, compare1);
+    }
+    if (tempString == "bubble-sort")
+    {
+        bubbleSort(a, size, runtime1);
+        bubbleSort(b, size, compare1);
+    }
+    if (tempString == "heap-sort")
+    {
+        heapSort(a, size, compare1);
+        heapSort(b, size, runtime1);
+    }
+    if (tempString == "merge-sort")
+    {
+        mergeSort(a, size, 0, size - 1, runtime1);
+        mergeSort(b, size, 0, size - 1, compare1);
+    }
+    if (tempString == "quick-sort")
+    {
+        quickSort(a, 0, size - 1, runtime1);
+        quickSort(b, 0, size - 1, compare1);
+    }
+    if (tempString == "radix-sort")
+    {
+        radixSort(a, size, compare1);
+        radixSort(b, size, runtime1);
+    }
+    if (tempString == "shaker-sort")
+    {
+        shakerSort(a, size, runtime1);
+        shakerSort(b, size, compare1);
+    }
+    if (tempString == "shell-sort")
+    {
+        shellSort(a, size, compare1);
+        shellSort(b, size, runtime1);
+    }
+    if (tempString == "counting-sort")
+    {
+        countingSort(a, size, compare1);
+        countingSort(b, size, runtime1);
+    }
+    if (tempString == "flash-sort")
+    {
+        flashSort(a, size, compare1);
+        flashSort(b, size, runtime1);
+    }
+    inputFile.close();
+    delete[] a, b;
+
+    inputFile.open(argv[4]);
+    long long compare2 = 0;
+    double runtime2 = 0;
+
+    tempString = argv[3];
+    a = new long long[size];
+    b = new long long[size];
+    for (int i = 0; i < size; i++)
+    {
+        inputFile >> a[i];
+        b[i] = a[i];
+    }
+
+    if (tempString == "selection-sort")
+    {
+        selectionSort(a, size, compare2);
+        selectionSort(b, size, runtime2);
+    }
+    if (tempString == "insertion-sort")
+    {
+        insertionSort(a, size, runtime2);
+        insertionSort(b, size, compare2);
+    }
+    if (tempString == "bubble-sort")
+    {
+        bubbleSort(a, size, runtime2);
+        bubbleSort(b, size, compare2);
+    }
+    if (tempString == "heap-sort")
+    {
+        heapSort(a, size, compare2);
+        heapSort(b, size, runtime2);
+    }
+    if (tempString == "merge-sort")
+    {
+        mergeSort(a, size, 0, size - 1, runtime2);
+        mergeSort(b, size, 0, size - 1, compare2);
+    }
+    if (tempString == "quick-sort")
+    {
+        quickSort(a, 0, size - 1, runtime2);
+        quickSort(b, 0, size - 1, compare2);
+    }
+    if (tempString == "radix-sort")
+    {
+        radixSort(a, size, compare2);
+        radixSort(b, size, runtime2);
+    }
+    if (tempString == "shaker-sort")
+    {
+        shakerSort(a, size, runtime2);
+        shakerSort(b, size, compare2);
+    }
+    if (tempString == "shell-sort")
+    {
+        shellSort(a, size, compare2);
+        shellSort(b, size, runtime2);
+    }
+    if (tempString == "counting-sort")
+    {
+        countingSort(a, size, compare2);
+        countingSort(b, size, runtime2);
+    }
+    if (tempString == "flash-sort")
+    {
+        flashSort(a, size, compare2);
+        flashSort(b, size, runtime2);
+    }
+    cout << "------------------------" << endl;
+    cout << "Running time: " << runtime1 << "ms | " << runtime2 <<"ms"<< endl;
+    cout << "Comparisons: " << compare1 << " | " << compare2 << endl;
+    delete[] a, b;
+    inputFile.close();
 }
 
 void Command5(int &argc, char *argv[])
@@ -363,7 +512,7 @@ void AlgorithmMode(int &argc, char *argv[])
 void CompareMode(int &argc, char *argv[])
 {
     cout << "COMPARE MODE" << endl;
-    if (atoi(argv[4]))
+    if (!atoi(argv[4]))
         Command4(argc, argv);
     else
         Command5(argc, argv);
