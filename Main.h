@@ -1,4 +1,4 @@
-#include "Sort.cpp"
+#include "Sort.h"
 
 void Command1(int &argc,char *argv[]);
 
