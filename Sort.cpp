@@ -1,10 +1,4 @@
-#include <iostream>
-#include <ctime>
-#include <time.h>
-#include <cstring>
-#include "DataGenerator.cpp"
-#include <vector>
-using namespace std;
+#include "Sort.h"
 
 void selectionSort(long long a[], int n, long long &compare)
 {

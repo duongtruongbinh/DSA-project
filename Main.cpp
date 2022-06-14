@@ -1,4 +1,4 @@
-#include "Sort.cpp"
+#include "Main.h"
 
 void Command1(int &argc, char *argv[])
 {
@@ -695,6 +695,7 @@ void Mode(int &argc, char *argv[])
         CompareMode(argc, argv);
     }
 }
+
 int main(int argc, char *argv[])
 {
     Mode(argc, argv);
