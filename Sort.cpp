@@ -223,6 +223,7 @@ void merge(long long a[], long int n, long int l, long int mid, long int r, long
     {
         a[k] = temp[k];
     }
+    delete[] temp;
 }
 
 void merge(long long a[], long int n, long int l, long int mid, long int r)
@@ -258,6 +259,7 @@ void merge(long long a[], long int n, long int l, long int mid, long int r)
     {
         a[k] = temp[k];
     }
+    delete[] temp;
 }
 
 void Split(long long a[], long int n, long int l, long int r, long long &comp)
@@ -297,57 +299,53 @@ void mergeSort(long long a[], long int n, int l, int r, double &runtime)
     runtime += (double)(end - start) * 1000 / CLOCKS_PER_SEC;
 }
 
-void quickSort(long long a[], int l, int r, long long &comp)
+void quickSort(long long a[], int first, int last, long long &comp)
 {
-    if (++comp && l < r)
+    int pivot = a[(last + first) / 2];
+    int i = first, j = last;
+    do
     {
-        long int i = l;
-        long int j = r;
-        long int mid = (l + r) / 2;
-        while (++comp && i < j)
+        while (++comp && a[i] < pivot)
+            i++;
+        while (++comp && a[j] > pivot)
+            j--;
+        if (++comp && i <= j)
         {
-            while (++comp && a[i] < a[mid])
-                i++;
-            while (++comp && a[j] > a[mid])
-                j--;
             swap(a[i], a[j]);
+            i++;
+            j--;
         }
-        i++;
-        j--;
-
-        if (++comp && i < r)
-            quickSort(a, i, r, comp);
-        if (++comp && j > l)
-            quickSort(a, l, j, comp);
-    }
+    } while (++comp && i < j);
+    if (++comp && j > first)
+        quickSort(a, first, j, comp);
+    if (++comp && i < last)
+        quickSort(a, i, last, comp);
 }
 
-void quickSort(long long a[], int l, int r, double &runtime)
+void quickSort(long long a[], int first, int last, double &runtime)
 {
     clock_t start, end;
     start = clock();
 
-    if (l < r)
+    int pivot = a[(last + first) / 2];
+    int i = first, j = last;
+    do
     {
-        long int i = l;
-        long int j = r;
-        long int mid = (l + r) / 2;
-        while (i < j)
+        while (a[i] < pivot)
+            i++;
+        while (a[j] > pivot)
+            j--;
+        if (i <= j)
         {
-            while (a[i] < a[mid])
-                i++;
-            while (a[j] > a[mid])
-                j--;
             swap(a[i], a[j]);
+            i++;
+            j--;
         }
-        i++;
-        j--;
-
-        if (i < r)
-            quickSort(a, i, r, runtime);
-        if (j > l)
-            quickSort(a, l, j, runtime);
-    }
+    } while (i < j);
+    if (j > first)
+        quickSort(a, first, j, runtime);
+    if (i < last)
+        quickSort(a, i, last, runtime);
 
     end = clock();
     runtime += (double)(end - start) * 1000 / CLOCKS_PER_SEC;
@@ -360,7 +358,6 @@ void radixSort(long long arr[], int n, long long &compare)
     for (int i = 1; ++compare && i < n; ++i)
         if (++compare && arr[i] > max_val)
         {
-
             max_val = arr[i];
         }
 
@@ -368,7 +365,6 @@ void radixSort(long long arr[], int n, long long &compare)
     do
     {
         digits++;
-
         div = max_val / pow(10, digits);
     } while (++compare && div > 0);
 
@@ -390,6 +386,7 @@ void radixSort(long long arr[], int n, long long &compare)
         for (int j = 0; ++compare && j < 10; ++j)
             for (int k = 0; ++compare && k < tempCount[j]; ++k)
                 arr[idx++] = tempArr[j][k];
+        delete[] tempArr;
     }
 }
 
@@ -434,6 +431,7 @@ void radixSort(long long arr[], int n, double &runtime)
     }
     clock_t end = clock();
     runtime += (double)(end - start) * 1000 / CLOCKS_PER_SEC;
+    delete[] tempArr;
 }
 
 void shakerSort(long long arr[], int n, long long &compare)
