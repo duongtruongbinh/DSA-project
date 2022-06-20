@@ -11,7 +11,7 @@ void selectionSort(long long a[], int n, long long &compare)
 
             if (++compare && a[j] < a[j - 1])
             {
-                minIndex = a[j];
+                minIndex = j;
             }
         }
         swap(a[i], a[minIndex]);
