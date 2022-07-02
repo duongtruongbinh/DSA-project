@@ -18,4 +18,6 @@ Examine the selected sorting algorithms on different data arrangements, includin
   -Nearly sorted data
   -Reverse sorted data
   -Randomized data
+  
+  
 Examine the selected sorting algorithms on data of the following sizes: 10,000, 30,000, 50,000, 100,000, 300,000, and 500,000 elements.
